@@ -1,5 +1,7 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
+import type { NextPage } from "next";
+import Head from "next/head";
+
+import Typography from "@mui/material/Typography";
 
 const Home: NextPage = () => {
   return (
@@ -10,9 +12,13 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-     <main><h1>Sam's Music</h1></main>
+      <main>
+        <Typography variant="h1" align="center">
+          Sam's Music
+        </Typography>
+      </main>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
