@@ -1,12 +1,23 @@
 export default {
-    name: 'artist',
-    title:'Artist',
-    type:'document',
-    fields: [
+  name: "artist",
+  title: "Artist",
+  type: "document",
+  fields: [
+    {
+      name: "name",
+      title: "Name",
+      type: "string",
+    },
+    {
+      name: "albums",
+      title: "Albums",
+      type: "array",
+      of: [
         {
-            name: 'name',
-            title: 'Name',
-            type: 'string',
-        }
-    ]    
-}
+          type: "reference",
+          to: { type: "album" },
+        },
+      ],
+    },
+  ],
+};
