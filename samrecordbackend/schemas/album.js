@@ -7,6 +7,7 @@ export default {
       name: "albumName",
       title: "Album Name",
       type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "albumYear",
@@ -22,10 +23,26 @@ export default {
       },
     },
     {
-      name: "categories",
-      title: "Categories",
+      name: "albumVersion",
+      title: "Version",
+      type: "string",
+    },
+    {
+      name: "genres",
+      title: "Generes",
       type: "array",
-      of: [{ type: "reference", to: { type: "category" } }],
+      of: [{ type: "reference", to: { type: "genre" } }],
+    },
+    {
+      name: "vibes",
+      title: "Vibes",
+      type: "array",
+      of: [{ type: "reference", to: { type: "vibe" } }],
+    },
+    {
+      name: "personalLinerNotes",
+      title: "Sam's Liner Notes",
+      type: "blockContent",
     },
   ],
 };
