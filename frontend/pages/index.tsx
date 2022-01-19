@@ -2,6 +2,8 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import client from "../lib/sanity";
 
+import ArtistHome from "../components/artist/ArtistHome";
+
 import Typography from "@mui/material/Typography";
 
 interface AlbumData {
@@ -13,10 +15,18 @@ interface AlbumData {
 
 interface ArtistData {
   artistName: string;
-  albums?: AlbumData;
+  albums?: AlbumData[];
 }
 
-const Home: NextPage = ({ data }) => {
+interface Data {
+  artistData: ArtistData[];
+}
+
+interface Props {
+  data: Data;
+}
+
+const Home: NextPage<Props> = ({ data }) => {
   const { artistData }: { artistData: ArtistData[] } = data;
 
   return (
@@ -33,28 +43,7 @@ const Home: NextPage = ({ data }) => {
         </Typography>
         {artistData.map((artist: ArtistData) => (
           <div key={artist.artistName}>
-            <h1>{artist.artistName}</h1>
-            {artist.albums?.map((album: AlbumData) => (
-              <div key={album.albumName}>
-                <h3>
-                  {album.albumName} -
-                  {/* {album.albumYear && ` - ${albumYear}`} */}
-                  {album.albumYear}
-                </h3>
-                <h4>Genres</h4>
-                <ul>
-                  {album.genres?.map((genre: any) => (
-                    <li key={genre.genreName}>{genre.genreName}</li>
-                  ))}
-                </ul>
-                <h4>Vibes</h4>
-                <ul>
-                  {album.vibes?.map((vibe: any) => (
-                    <li key={vibe.vibe}>{vibe.vibeName}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <ArtistHome artistName={artist.artistName} />
           </div>
         ))}
       </main>
@@ -62,7 +51,9 @@ const Home: NextPage = ({ data }) => {
   );
 };
 
-const artistQuery = `*[_type == "artist"]{artistName, albums[] -> {albumName, albumYear, genres[] -> {genreName}, vibes[] -> {vibeName}}} | order(artistName asc)`;
+// const artistQuery = `*[_type == "artist"]{artistName, albums[] -> {albumName, albumYear, genres[] -> {genreName}, vibes[] -> {vibeName}}} | order(artistName asc)`;
+
+const artistQuery = `*[_type == "artist"]{artistName}`;
 
 export async function getStaticProps() {
   const artistData: any = await client.fetch(artistQuery);
