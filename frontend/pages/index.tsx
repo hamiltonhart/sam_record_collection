@@ -5,6 +5,8 @@ import client from "../lib/sanity";
 import ArtistHome from "../components/artist/ArtistHome";
 
 import Typography from "@mui/material/Typography";
+import { Button } from "@mui/material";
+import { useState } from "react";
 
 interface AlbumData {
   albumName?: string;
@@ -29,6 +31,33 @@ interface Props {
 const Home: NextPage<Props> = ({ data }) => {
   const { artistData }: { artistData: ArtistData[] } = data;
 
+  const [clicked, setClicked] = useState("");
+
+  // Album: https://api.discogs.com/masters/
+  // Artist: https://api.discogs.com/artists/
+
+  const buttonPress = () => {
+    // fetch(`https://api.discogs.com/masters/122963`)
+    //   .then((response) => response.json())
+    //   .then((data) => console.log(data));
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Discogs key=${process.env.NEXT_PUBLIC_DISCOGS_KEY}, secret=${process.env.NEXT_PUBLIC_DISCOGS_SECRET}`,
+    };
+
+    const myInit = { headers: headers };
+
+    const myRequest = new Request(
+      "https://api.discogs.com/masters/122963",
+      myInit
+    );
+
+    fetch(myRequest).then((response) =>
+      response.json().then((data) => setClicked(data.images[0].uri))
+    );
+  };
+
   return (
     <div>
       <Head>
@@ -41,12 +70,17 @@ const Home: NextPage<Props> = ({ data }) => {
         <Typography variant="h1" align="center">
           Sam's Music
         </Typography>
-        {artistData.map((artist: ArtistData) => (
-          <div key={artist.artistName}>
-            <ArtistHome artistName={artist.artistName} />
-          </div>
-        ))}
       </main>
+      <div>
+        <Button variant="contained" onClick={() => buttonPress()}>
+          Push Me
+        </Button>
+        {clicked && (
+          <p>
+            <img src={clicked} />
+          </p>
+        )}
+      </div>
     </div>
   );
 };
