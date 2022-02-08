@@ -8,7 +8,7 @@ const client: {
   ignoreBrowserTokenWarning: boolean;
 } = sanityClient({
   projectId: process.env.PROJECT_ID,
-  dataset: "production",
+  dataset: process.env.SANITY_DATASET || "production",
   token: process.env.API_TOKEN,
   useCdn: false,
   ignoreBrowserTokenWarning: true,

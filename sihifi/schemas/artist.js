@@ -15,5 +15,13 @@ export default {
       description:
         "The ID for the artist when viewing their page on Discogs. It is in the URL bar and is a number.",
     },
+    {
+      name: "artistImage",
+      title: "Artist Image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    },
   ],
 };

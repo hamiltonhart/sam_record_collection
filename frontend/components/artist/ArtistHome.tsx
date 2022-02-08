@@ -5,7 +5,7 @@ interface Props {
 }
 
 const ArtistHome = (props: Props) => {
-  return <Typography variant="h2">{props.artistName}</Typography>;
+  return <Typography variant="h4">{props.artistName}</Typography>;
 };
 
 export default ArtistHome;

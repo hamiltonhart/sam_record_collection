@@ -10,6 +10,11 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: "shelfSection",
+      title: "Shelf Location",
+      type: "string",
+    },
+    {
       name: "discogsAlbumId",
       title: "Discogs ID",
       type: "string",

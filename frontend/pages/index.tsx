@@ -32,15 +32,16 @@ const Home: NextPage<Props> = ({ data }) => {
   return (
     <div>
       <Head>
-        <title>Musica de Iorio</title>
+        <title>SIHIFI</title>
         <meta name="description" content="All of Sam's Albums!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
         <Typography variant="h1" align="center">
-          Sam's Music
+          SIHIFI
         </Typography>
+        <Typography variant="h3">{`Total Artists: ${artistData.length}`}</Typography>
         {artistData.map((artist: ArtistData) => (
           <div key={artist.artistName}>
             <ArtistHome artistName={artist.artistName} />
@@ -53,7 +54,7 @@ const Home: NextPage<Props> = ({ data }) => {
 
 // const artistQuery = `*[_type == "artist"]{artistName, albums[] -> {albumName, albumYear, genres[] -> {genreName}, vibes[] -> {vibeName}}} | order(artistName asc)`;
 
-const artistQuery = `*[_type == "artist"]{artistName}`;
+const artistQuery = `*[_type == "artist"][0...10]{artistName}`;
 
 export async function getStaticProps() {
   const artistData: any = await client.fetch(artistQuery);
