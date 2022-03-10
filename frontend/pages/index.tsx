@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { ImageHeaderCard } from "../components/cards/ImageHeaderCard";
 import { Card } from "../components/global/styles/Containers";
-import { SquareImage } from "../components/global/styles/Images";
 import client from "../lib/sanity";
 
 interface AlbumData {
@@ -35,7 +35,6 @@ const Home: NextPage<Props> = ({ data }) => {
 
   return (
     <>
-      {console.log(artistData[1].artistImage.asset.url)}
       <Head>
         <title>SIHIFI | Home</title>
         <meta
@@ -48,15 +47,17 @@ const Home: NextPage<Props> = ({ data }) => {
       <main>
         <h1>SIHIFI</h1>
       </main>
-      <Card backgroundColor="var(--primary)">
-        <Image
-          src={artistData[1].artistImage.asset.url}
-          width="180px"
-          height="180px"
-        />
-
-        <h3>Album</h3>
-      </Card>
+      <ImageHeaderCard
+        imageSrc={artistData[1].artistImage.asset.url}
+        cardTitle="Artists"
+        headingColor="var(--black)"
+        backgroundColor="var(--primary)"
+      />
+      <ImageHeaderCard
+        imageSrc={albumData[1].albumArt.asset.url}
+        cardTitle="Albums"
+        reverse={true}
+      />
     </>
   );
 };
@@ -64,7 +65,7 @@ const Home: NextPage<Props> = ({ data }) => {
 // const artistQuery = `*[_type == "artist"]{artistName, albums[] -> {albumName, albumYear, genres[] -> {genreName}, vibes[] -> {vibeName}}} | order(artistName asc)`;
 
 const artistQuery = `*[_type == "artist"][0...10]{_id, artistName, discogsArtistId, artistImage{asset->{url}}}`;
-const albumQuery = `*[_type == "album"][0...10]{_id, albumName}`;
+const albumQuery = `*[_type == "album"][0...10]{_id, albumName, albumArt{asset->{url}}}`;
 
 export async function getStaticProps() {
   const artistData: any = await client.fetch(artistQuery);

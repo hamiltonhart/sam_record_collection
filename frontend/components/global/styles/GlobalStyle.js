@@ -18,18 +18,18 @@ export const GlobalStyle = createGlobalStyle`
         --redContrast: #FFEEEE;
         ${"" /* TextSizing */}
         font-size: 62.5%;
-        --xxs: 1rem;
-        --xs: 1.2rem;
-        --sm: 1.4rem;
-        --normal: 1.6rem;
-        --bitMore: 1.8rem;
-        --medium: 2rem;
-        --mediumBig: 2.4rem;
-        --big: 3rem;
-        --large: 3.6rem;
-        --larger: 4.8rem;
-        --huge: 6rem;
-        --superHuge: 7.2rem;
+        --aa: 1rem;
+        --a: 1.2rem;
+        --b: 1.4rem;
+        --c: 1.6rem;
+        --d: 1.8rem;
+        --e: 2rem;
+        --f: 2.4rem;
+        --g: 3rem;
+        --h: 3.6rem;
+        --i: 4.8rem;
+        --j: 6rem;
+        --k: 7.2rem;
         ${"" /* Box Shadows */}
         --bs: 0 1px 10px 5px rgba(217, 226, 236, 1);
         ${"" /* Radius */}
